@@ -57,26 +57,3 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     maxAge: 30 * 24 * 60 * 60, // 30日
   },
 })
-
-// 型定義の拡張
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string
-      email: string
-      name: string
-      grade: number
-    }
-  }
-
-  interface User {
-    grade?: number
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    id?: string
-    grade?: number
-  }
-}
