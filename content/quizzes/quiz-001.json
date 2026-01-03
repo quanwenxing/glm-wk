@@ -1,0 +1,26 @@
+[
+  {
+    "id": "quiz-001-01",
+    "theme_id": "theme-001",
+    "question": "光合成で作られるものはどれですか？",
+    "options": ["酸素とでんぷん", "二酸化炭素と水", "窒素と酸素", "水と栄養"],
+    "correct_answer": 0,
+    "order": 1
+  },
+  {
+    "id": "quiz-001-02",
+    "theme_id": "theme-001",
+    "question": "光合成が行われている場所はどこですか？",
+    "options": ["根", "茎", "葉の葉緑体", "花"],
+    "correct_answer": 2,
+    "order": 2
+  },
+  {
+    "id": "quiz-001-03",
+    "theme_id": "theme-001",
+    "question": "光合成に必要でないものはどれですか？",
+    "options": ["太陽の光", "二酸化炭素", "水", "塩"],
+    "correct_answer": 3,
+    "order": 3
+  }
+]

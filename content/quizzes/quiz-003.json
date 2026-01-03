@@ -1,0 +1,26 @@
+[
+  {
+    "id": "quiz-003-01",
+    "theme_id": "theme-003",
+    "question": "次の計算の答えはどれですか？ 2/5 + 1/5",
+    "options": ["3/5", "3/10", "2/5", "1/5"],
+    "correct_answer": 0,
+    "order": 1
+  },
+  {
+    "id": "quiz-003-02",
+    "theme_id": "theme-003",
+    "question": "次の計算の答えはどれですか？ 1/2 + 1/4",
+    "options": ["2/6", "2/4", "3/4", "1/3"],
+    "correct_answer": 2,
+    "order": 2
+  },
+  {
+    "id": "quiz-003-03",
+    "theme_id": "theme-003",
+    "question": "4/6 を約分するとどうなりますか？",
+    "options": ["1/3", "2/3", "4/6", "2/6"],
+    "correct_answer": 1,
+    "order": 3
+  }
+]

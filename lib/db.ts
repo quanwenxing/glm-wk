@@ -169,3 +169,28 @@ export const mockQuizzes: Quiz[] = [
     created_at: new Date(),
   },
 ]
+
+// 開発環境用の進捗ダミーデータ
+export const mockProgress: Progress[] = [
+  {
+    id: "progress-001",
+    user_id: "user-001",
+    theme_id: "theme-001",
+    completed: false,
+    quiz_score: null,
+    completed_at: null,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+]
+
+// 開発環境用のユーザーダミーデータ
+export const mockUsers: User[] = [
+  {
+    id: "user-001",
+    email: "test@example.com",
+    name: "テストユーザー",
+    grade: 5,
+    created_at: new Date(),
+  },
+]
