@@ -2,6 +2,7 @@ import { ThemeCard } from "@/components/ThemeCard"
 import { Button } from "@/components/ui/button"
 import { BookOpen, Calculator, Beaker, Globe } from "lucide-react"
 import Link from "next/link"
+import { headers } from "next/headers"
 
 type SubjectType = "kokugo" | "sansu" | "rika" | "shakai"
 
@@ -52,7 +53,12 @@ const subjects: Subject[] = [
 const grades = [4, 5, 6]
 
 async function getThemes() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+  // サーバーサイドレンダリングでは絶対URLが必要
+  const headersList = await headers()
+  const host = headersList.get("host") || "localhost:3001"
+  const protocol = headersList.get("x-forwarded-proto") || "http"
+  const baseUrl = `${protocol}://${host}`
+
   const res = await fetch(`${baseUrl}/api/themes`, {
     cache: "no-store",
   })

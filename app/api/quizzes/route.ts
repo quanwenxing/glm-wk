@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { mockQuizzes, Quiz } from "@/lib/db"
+import { Quiz } from "@/lib/db"
+import fs from "fs/promises"
+import path from "path"
 
 /**
  * GET /api/quizzes
@@ -23,8 +25,21 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // モックデータからフィルタリング
-    const filteredQuizzes = mockQuizzes.filter((quiz) => quiz.theme_id === themeId)
+    // JSONファイルからクイズデータを読み込む
+    const quizzesDir = path.join(process.cwd(), "content", "quizzes")
+    const files = await fs.readdir(quizzesDir)
+    const quizFiles = files.filter(f => f.endsWith(".json"))
+
+    let allQuizzes: Quiz[] = []
+    for (const file of quizFiles) {
+      const filePath = path.join(quizzesDir, file)
+      const content = await fs.readFile(filePath, "utf-8")
+      const quizzes = JSON.parse(content) as Quiz[]
+      allQuizzes.push(...quizzes)
+    }
+
+    // themeIdでフィルタリング
+    const filteredQuizzes = allQuizzes.filter((quiz) => quiz.theme_id === themeId)
 
     if (filteredQuizzes.length === 0) {
       return NextResponse.json(
@@ -37,7 +52,7 @@ export async function GET(request: NextRequest) {
     }
 
     // order順にソート
-    filteredQuizzes.sort((a, b) => a.order - b.order)
+    filteredQuizzes.sort((a, b) => (a.order || 0) - (b.order || 0))
 
     return NextResponse.json(filteredQuizzes, { status: 200 })
   } catch (error) {

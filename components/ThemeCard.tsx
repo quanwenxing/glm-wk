@@ -50,7 +50,7 @@ export function ThemeCard({
   href,
   className,
 }: ThemeCardProps) {
-  const subjectInfo = subjectColors[subject]
+  const subjectInfo = subjectColors[subject] || subjectColors.kokugo // デフォルト値を設定
 
   const cardContent = (
     <>

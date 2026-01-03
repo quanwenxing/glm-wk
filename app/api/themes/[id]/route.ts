@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { mockThemes, Theme } from "@/lib/db"
+import { Theme } from "@/lib/db"
+import fs from "fs/promises"
+import path from "path"
 
 /**
  * GET /api/themes/:id
@@ -24,17 +26,30 @@ export async function GET(
       )
     }
 
-    // モックデータから検索
-    const theme = mockThemes.find((theme) => theme.id === id)
+    // JSONファイルからテーマデータを読み込む
+    const themesDir = path.join(process.cwd(), "content", "themes")
+    const files = await fs.readdir(themesDir)
+    const themeFiles = files.filter(f => f.endsWith(".json"))
 
-    if (!theme) {
-      return NextResponse.json(
-        { error: "テーマが見つかりません", message: `ID: ${id} のテーマは存在しません` },
-        { status: 404 }
-      )
+    for (const file of themeFiles) {
+      const filePath = path.join(themesDir, file)
+      const content = await fs.readFile(filePath, "utf-8")
+      const theme = JSON.parse(content) as Theme
+
+      if (theme.id === id) {
+        // created_atとupdated_atを追加
+        return NextResponse.json({
+          ...theme,
+          created_at: new Date(),
+          updated_at: new Date(),
+        }, { status: 200 })
+      }
     }
 
-    return NextResponse.json(theme, { status: 200 })
+    return NextResponse.json(
+      { error: "テーマが見つかりません", message: `ID: ${id} のテーマは存在しません` },
+      { status: 404 }
+    )
   } catch (error) {
     console.error("Error in GET /api/themes/[id]:", error)
     return NextResponse.json(

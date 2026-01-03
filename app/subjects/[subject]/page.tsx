@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { BookOpen, Calculator, Beaker, Globe, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { headers } from "next/headers"
 
 type SubjectType = "kokugo" | "sansu" | "rika" | "shakai"
 
@@ -57,14 +58,19 @@ interface SubjectPageProps {
 }
 
 async function getThemes(subject: SubjectType, grade?: number) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-  const url = new URL(`${baseUrl}/api/themes`)
-  url.searchParams.set("subject", subject)
+  // サーバーサイドレンダリングでは絶対URLが必要
+  const headersList = await headers()
+  const host = headersList.get("host") || "localhost:3001"
+  const protocol = headersList.get("x-forwarded-proto") || "http"
+  const baseUrl = `${protocol}://${host}`
+
+  const params = new URLSearchParams()
+  params.set("subject", subject)
   if (grade) {
-    url.searchParams.set("grade", grade.toString())
+    params.set("grade", grade.toString())
   }
 
-  const res = await fetch(url.toString(), {
+  const res = await fetch(`${baseUrl}/api/themes?${params.toString()}`, {
     cache: "no-store",
   })
 

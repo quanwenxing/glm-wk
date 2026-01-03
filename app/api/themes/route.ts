@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { mockThemes, Theme } from "@/lib/db"
+import { Theme } from "@/lib/db"
+import fs from "fs/promises"
+import path from "path"
 
 /**
  * GET /api/themes
@@ -33,8 +35,26 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // モックデータからフィルタリング
-    let filteredThemes = [...mockThemes]
+    // JSONファイルからテーマデータを読み込む
+    const themesDir = path.join(process.cwd(), "content", "themes")
+    const files = await fs.readdir(themesDir)
+    const themeFiles = files.filter(f => f.endsWith(".json"))
+
+    let themes: Theme[] = []
+    for (const file of themeFiles) {
+      const filePath = path.join(themesDir, file)
+      const content = await fs.readFile(filePath, "utf-8")
+      const theme = JSON.parse(content) as Theme
+      // created_atとupdated_atを追加（JSONには含まれていないため）
+      themes.push({
+        ...theme,
+        created_at: new Date(),
+        updated_at: new Date(),
+      })
+    }
+
+    // 科目と学年でフィルタリング
+    let filteredThemes = themes
 
     if (subject) {
       filteredThemes = filteredThemes.filter((theme) => theme.subject === subject)
@@ -45,7 +65,7 @@ export async function GET(request: NextRequest) {
     }
 
     // order順にソート
-    filteredThemes.sort((a, b) => a.order - b.order)
+    filteredThemes.sort((a, b) => (a.order || 0) - (b.order || 0))
 
     return NextResponse.json(filteredThemes, { status: 200 })
   } catch (error) {

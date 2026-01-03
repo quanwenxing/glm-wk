@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import { headers } from "next/headers"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Play } from "lucide-react"
@@ -25,7 +26,12 @@ const SUBJECT_NAMES: Record<string, string> = {
 }
 
 async function getTheme(id: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || ""
+  // サーバーサイドレンダリングでは絶対URLが必要
+  const headersList = await headers()
+  const host = headersList.get("host") || "localhost:3001"
+  const protocol = headersList.get("x-forwarded-proto") || "http"
+  const baseUrl = `${protocol}://${host}`
+
   const res = await fetch(`${baseUrl}/api/themes/${id}`, {
     cache: "no-store",
   })
