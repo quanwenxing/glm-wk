@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 中学受験学習サイト
 
-## Getting Started
+中学受験を準備している小学生向けの、画像や動画を活用しながら楽しく勉強できる学習サイトです。
 
-First, run the development server:
+## プロジェクト概要
+
+- **対象**: 小学4年生〜6年生の中学受験生
+- **目的**: 塾での学習テーマの予習・復習
+- **対象科目**: 国語・算数・理科・社会
+- **対応デバイス**: PC・タブレット・スマートフォン（レスポンシブ対応）
+
+## 技術スタック
+
+- **フレームワーク**: [Next.js](https://nextjs.org) (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS
+- **UIコンポーネント**: [shadcn/ui](https://ui.shadcn.com/)
+- **認証**: NextAuth.js（予定）
+- **データベース**: Cloudflare D1（予定）
+- **ホスティング**: Cloudflare Pages（予定）
+
+## セットアップ手順
+
+### 1. リポジトリのクローン
+
+```bash
+git clone <repository-url>
+cd glm-wk
+```
+
+### 2. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 3. 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[http://localhost:3000](http://localhost:3000) にアクセスして確認してください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## プロジェクト構成
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+/
+├── app/                    # Next.js App Router
+│   ├── (auth)/            # 認証関連ページ
+│   ├── subjects/          # 科目一覧
+│   ├── themes/            # テーマ詳細
+│   └── quiz/              # クイズ
+├── components/            # Reactコンポーネント
+│   └── ui/               # shadcn/ui コンポーネント
+├── lib/                  # ユーティリティ関数
+├── public/               # 静的ファイル（画像、ドキュメント）
+└── content/              # コンテンツデータ（JSON/Markdown）
+```
 
-## Learn More
+## 開発ガイド
 
-To learn more about Next.js, take a look at the following resources:
+### プロジェクト管理
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [要件定義書](./requirements.md) - プロジェクトの要件定義
+- [開発プロジェクト管理ガイド](./docs/PROJECT_MANAGEMENT.md) - GitHub Projectsのセットアップや開発フロー
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### タスク管理
 
-## Deploy on Vercel
+- GitHub Projects でタスク管理
+- [Issues](../../issues) で各タスクを管理
+- 朝のスタンドアップ・週次進捗会議で進捗共有
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ブランチ戦略
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+main (本番環境)
+  └── feature/機能名
+```
+
+## ライセンス
+
+TBD
