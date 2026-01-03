@@ -1,0 +1,12 @@
+# Cloudflare Workers の設定ファイル
+# ドキュメント: https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name = "glm-wk"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare D1 データベース設定
+[[d1_databases]]
+binding = "DB"
+database_name = "glm-wk-db"
+database_id = "your-database-id-here"  # 本番環境のデータベースIDに置き換え

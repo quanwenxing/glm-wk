@@ -4,10 +4,23 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Basic Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Subject Colors */
+  --color-kokugo: var(--kokugo);
+  --color-sansu: var(--sansu);
+  --color-rika: var(--rika);
+  --color-shakai: var(--shakai);
+
+  /* Semantic Colors */
+  --color-success: var(--success);
+  --color-error: var(--error);
+
+  /* Component Colors */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -37,6 +50,8 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* Border Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -47,30 +62,48 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --radius: 0.75rem;
+
+  /* Basic Colors - Pop & Colorful Kids Design */
+  --background: oklch(0.98 0.01 85);      /* Cream color #FEFCE8 */
+  --foreground: oklch(0.25 0.01 240);     /* Dark gray #1F2937 */
+  --card: oklch(1 0 0);                    /* White */
+  --card-foreground: oklch(0.25 0.01 240);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --popover-foreground: oklch(0.25 0.01 240);
+
+  /* Primary Colors */
+  --primary: oklch(0.55 0.22 250);         /* Blue #3B82F6 */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.80 0.15 85);        /* Yellow #FBBF24 */
+  --secondary-foreground: oklch(0.25 0.01 240);
+  --muted: oklch(0.95 0.01 85);
+  --muted-foreground: oklch(0.50 0.01 240);
+  --accent: oklch(0.85 0.15 85);
+  --accent-foreground: oklch(0.25 0.01 240);
+  --destructive: oklch(0.55 0.22 25);      /* Red #EF4444 */
+  --border: oklch(0.90 0.01 85);
+  --input: oklch(0.90 0.01 85);
+  --ring: oklch(0.55 0.22 250);
+
+  /* Subject Colors */
+  --kokugo: oklch(0.60 0.20 25);           /* Red #EF4444 */
+  --sansu: oklch(0.55 0.22 250);           /* Blue #3B82F6 */
+  --rika: oklch(0.65 0.18 142);            /* Green #22C55E */
+  --shakai: oklch(0.65 0.20 35);           /* Orange #F97316 */
+
+  /* Semantic Colors */
+  --success: oklch(0.65 0.18 142);          /* Green */
+  --error: oklch(0.60 0.20 25);            /* Red */
+
+  /* Chart Colors */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+
+  /* Sidebar */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
